@@ -30,7 +30,7 @@ class MacD(IStrategy):
     }
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe["macd"] = ta.MACD(dataframe.apply(lambda x: x.argmax(), axis=1).values, fastperiod=12, slowperiod=26, signalperiod=9)
+        dataframe["macd"] = ta.MACD(dataframe, fastperiod=12, slowperiod=26, signalperiod=9)
         dataframe["signal"] = ta.SMA(dataframe['macd'], timeperiod=9)
         dataframe["hist"] = dataframe['macd'] - dataframe['signal']
 
